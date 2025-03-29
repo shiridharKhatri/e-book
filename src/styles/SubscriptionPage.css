@@ -1,0 +1,364 @@
+.subscription-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--ghibli-blue) 0%, var(--primary-color) 100%);
+  padding: 4rem 2rem;
+  color: white;
+}
+
+.subscription-header {
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.subscription-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.subscription-header p {
+  font-size: 1.2rem;
+  max-width: 500px;
+  opacity: 0.9;
+}
+
+.subscription-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Pricing Cards */
+.pricing-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.pricing-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  padding-top: 2rem;
+}
+
+.pricing-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card.featured {
+  transform: translateY(-20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-card.featured:hover {
+  transform: translateY(-30px);
+}
+
+.pricing-card.silver {
+  background: linear-gradient(145deg, var(--card-bg) 0%, var(--background-color) 100%);
+}
+
+.pricing-card.gold {
+  background: linear-gradient(145deg, var(--primary-color) 0%, var(--ghibli-blue) 100%);
+  color: white;
+}
+
+.pricing-card.platinum {
+  background: linear-gradient(145deg, var(--card-bg) 0%, var(--background-color) 100%);
+}
+
+.pricing-card-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.pricing-card-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.pricing-price {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-price span {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.pricing-period {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+.pricing-description {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.pricing-features {
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.pricing-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pricing-features li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pricing-features li:last-child {
+  border-bottom: none;
+}
+
+.pricing-features li svg {
+  color: var(--ghibli-green);
+  flex-shrink: 0;
+}
+
+.pricing-features li.not-included {
+  opacity: 0.5;
+}
+
+.pricing-features li.not-included svg {
+  color: var(--accent-color);
+}
+
+.pricing-button {
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+.pricing-card.silver .pricing-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pricing-card.gold .pricing-button {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.pricing-card.platinum .pricing-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pricing-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 30px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-toggle-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.pricing-toggle-button.active {
+  background-color: var(--ghibli-yellow);
+  color: var(--ghibli-night);
+  font-weight: 600;
+}
+
+/* FAQ Section */
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto 5rem;
+}
+
+.faq-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.faq-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.faq-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+
+.faq-item p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--ghibli-green) 0%, var(--ghibli-blue) 100%);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/placeholder.svg?height=100&width=100");
+  background-size: 100px;
+  opacity: 0.05;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  background-color: var(--ghibli-yellow);
+  color: var(--ghibli-night);
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .subscription-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .pricing-card.featured {
+    transform: translateY(0);
+  }
+
+  .pricing-card:hover,
+  .pricing-card.featured:hover {
+    transform: translateY(-10px);
+  }
+
+  .pricing-price {
+    font-size: 2.5rem;
+  }
+
+  .cta-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .cta-section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .pricing-options {
+    flex-wrap: nowrap;
+  }
+}
+

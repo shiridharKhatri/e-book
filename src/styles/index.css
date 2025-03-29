@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ghibli:wght@400;500;700&display=swap");
+
+:root {
+  /* Updated color palette with more Ghibli-inspired colors */
+  --primary-color: #5a9ec9;
+  --secondary-color: #f3b749;
+  --accent-color: #e07a5f;
+  --background-color: #f8f5e6;
+  --text-color: #3a3a3a;
+  --light-text: #6e6e6e;
+  --border-color: #e0ddd0;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Ghibli-specific colors */
+  --ghibli-blue: #6fb1e4;
+  --ghibli-green: #8cc084;
+  --ghibli-yellow: #f9d56e;
+  --ghibli-pink: #f4a6b8;
+  --ghibli-brown: #a67c52;
+  --ghibli-sky: #a5d8ff;
+  --ghibli-forest: #5d9c59;
+  --ghibli-sunset: #ff9e7d;
+  --ghibli-night: #2c3e50;
+  --ghibli-cream: #fff8e6;
+
+  /* New Ghibli-inspired colors */
+  --ghibli-dust: #d4c8a8;
+  --ghibli-spirit: #b3e5fc;
+  --ghibli-totoro-gray: #8e9eab;
+  --ghibli-calcifer: #ff6b6b;
+  --ghibli-leaf: #7cb342;
+}
+
+.dark {
+  --primary-color: #78b0e3;
+  --secondary-color: #ffb74d;
+  --accent-color: #ff8a80;
+  --background-color: #1f2937;
+  --text-color: #e0e0e0;
+  --light-text: #b0b0b0;
+  --border-color: #374151;
+  --card-bg: #2d3748;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  /* Dark mode Ghibli colors */
+  --ghibli-blue: #4a89dc;
+  --ghibli-green: #5d9c59;
+  --ghibli-yellow: #f9d56e;
+  --ghibli-pink: #e07a9e;
+  --ghibli-brown: #a67c52;
+  --ghibli-sky: #5d8cb3;
+  --ghibli-forest: #3a6b39;
+  --ghibli-sunset: #e07a5f;
+  --ghibli-night: #1a2639;
+  --ghibli-cream: #d4c8a8;
+  --ghibli-dust: #9e9583;
+  --ghibli-spirit: #64b5f6;
+  --ghibli-totoro-gray: #607d8b;
+  --ghibli-calcifer: #ff5252;
+  --ghibli-leaf: #558b2f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Sen", "Ghibli", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ghibli-style scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ghibli-dust);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ghibli-brown);
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.8);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+

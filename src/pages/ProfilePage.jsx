@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const user = {
     name: "Chihiro Ogino",
     email: "chihiro@example.com",
-    avatar: "/placeholder.svg?height=200&width=200",
+    avatar: "/placeholder.png?height=200&width=200",
     memberSince: "January 2023",
     isPremium: true,
   }
@@ -27,19 +27,19 @@ const ProfilePage = () => {
       {
         id: 1,
         title: "The Wind Rises",
-        cover: "/placeholder.svg?height=400&width=300",
+        cover: "/placeholder.png?height=400&width=300",
         progress: 45,
       },
       {
         id: 2,
         title: "Spirited Away: The Novel",
-        cover: "/placeholder.svg?height=400&width=300",
+        cover: "/placeholder.png?height=400&width=300",
         progress: 78,
       },
       {
         id: 3,
         title: "Howl's Moving Castle",
-        cover: "/placeholder.svg?height=400&width=300",
+        cover: "/placeholder.png?height=400&width=300",
         progress: 12,
       },
     ],
@@ -47,13 +47,13 @@ const ProfilePage = () => {
       {
         id: 1,
         title: "Princess Mononoke",
-        cover: "/placeholder.svg?height=400&width=300",
+        cover: "/placeholder.png?height=400&width=300",
         progress: 65,
       },
       {
         id: 2,
         title: "My Neighbor Totoro",
-        cover: "/placeholder.svg?height=400&width=300",
+        cover: "/placeholder.png?height=400&width=300",
         progress: 30,
       },
     ],
@@ -61,13 +61,13 @@ const ProfilePage = () => {
       {
         id: 1,
         title: "The Art of Studio Ghibli",
-        thumbnail: "/placeholder.svg?height=400&width=600",
+        thumbnail: "/placeholder.png?height=400&width=600",
         progress: 50,
       },
       {
         id: 2,
         title: "Ponyo: The Making Of",
-        thumbnail: "/placeholder.svg?height=400&width=600",
+        thumbnail: "/placeholder.png?height=400&width=600",
         progress: 90,
       },
     ],
@@ -78,19 +78,19 @@ const ProfilePage = () => {
       id: 1,
       title: "Spirited Away: The Novel",
       type: "ebook",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
     },
     {
       id: 2,
       title: "Princess Mononoke",
       type: "audiobook",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
     },
     {
       id: 3,
       title: "The Art of Studio Ghibli",
       type: "video",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
     },
   ]
 
@@ -108,7 +108,7 @@ const ProfilePage = () => {
               whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
             >
               <div className="item-cover">
-                <img src={book.cover || "/placeholder.svg"} alt={book.title} />
+                <img src={book.cover || "/placeholder.png"} alt={book.title} />
                 <div className="progress-overlay">
                   <div className="progress-bar">
                     <div className="progress-fill" style={{ width: `${book.progress}%` }}></div>
@@ -135,7 +135,7 @@ const ProfilePage = () => {
               whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
             >
               <div className="item-cover">
-                <img src={audio.cover || "/placeholder.svg"} alt={audio.title} />
+                <img src={audio.cover || "/placeholder.png"} alt={audio.title} />
                 <div className="progress-overlay">
                   <div className="progress-bar">
                     <div className="progress-fill" style={{ width: `${audio.progress}%` }}></div>
@@ -162,7 +162,7 @@ const ProfilePage = () => {
               whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
             >
               <div className="item-thumbnail">
-                <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} />
+                <img src={video.thumbnail || "/placeholder.png"} alt={video.title} />
                 <div className="progress-overlay">
                   <div className="progress-bar">
                     <div className="progress-fill" style={{ width: `${video.progress}%` }}></div>
@@ -282,7 +282,7 @@ const ProfilePage = () => {
       <div className="profile-header">
         <div className="profile-info">
           <div className="profile-avatar">
-            <img src={user.avatar || "/placeholder.svg"} alt={user.name} />
+            <img src={user.avatar || "/placeholder.png"} alt={user.name} />
             {user.isPremium && <div className="premium-badge">Premium</div>}
           </div>
           <div className="profile-details">

@@ -22,7 +22,7 @@ const EbooksPage = () => {
       id: 1,
       title: "The Wind Rises",
       author: "Hayao Miyazaki",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "A captivating tale of dreams and determination in pre-war Japan. Follow the journey of Jiro Horikoshi as he pursues his passion for aviation despite the challenges of his time. This novelization of the acclaimed film delves deeper into the characters and historical context.",
       price: 12.99,
@@ -39,7 +39,7 @@ const EbooksPage = () => {
       id: 2,
       title: "Princess Mononoke: The Journey",
       author: "Studio Ghibli",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "Follow the epic journey of Ashitaka as he seeks to find a cure for a deadly curse. Caught in the middle of a war between forest gods and humans consuming natural resources, Ashitaka must find a way to bring balance to both worlds. This expanded novelization includes exclusive content not seen in the film.",
       price: 14.99,
@@ -56,7 +56,7 @@ const EbooksPage = () => {
       id: 3,
       title: "Spirited Away: The Novel",
       author: "Hayao Miyazaki",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "The novelization of the Academy Award-winning film about a young girl's journey in a spirit world. When Chihiro's parents are transformed into pigs, she must navigate a mysterious bathhouse for spirits to find a way to free them and return to the human world.",
       price: 11.99,
@@ -73,7 +73,7 @@ const EbooksPage = () => {
       id: 4,
       title: "My Neighbor Totoro",
       author: "Tsugiko Kubo",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "The heartwarming story of two sisters and their encounters with friendly forest spirits. When Satsuki and Mei move to the countryside with their father, they discover magical creatures living in the nearby forest, including the gentle giant Totoro.",
       price: 9.99,
@@ -90,7 +90,7 @@ const EbooksPage = () => {
       id: 5,
       title: "Howl's Moving Castle",
       author: "Diana Wynne Jones",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "The original novel that inspired the beloved Ghibli film about a young woman cursed with an old body. Sophie Hatter, the eldest of three sisters, is resigned to a dull life in her family's hat shop until she is cursed by the Witch of the Waste and transformed into an old woman.",
       price: 13.99,
@@ -107,7 +107,7 @@ const EbooksPage = () => {
       id: 6,
       title: "Kiki's Delivery Service",
       author: "Eiko Kadono",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description:
         "Follow the adventures of a young witch who uses her flying ability to earn a living. As tradition dictates, thirteen-year-old Kiki must spend a year living alone in a new town to become a full-fledged witch. With her black cat Jiji, she settles in a seaside town and starts a delivery service.",
       price: 10.99,
@@ -185,7 +185,7 @@ const EbooksPage = () => {
             onClick={() => openBookDetail(book)}
           >
             <div className="book-cover">
-              <img src={book.cover || "/placeholder.svg"} alt={book.title} />
+              <img src={book.cover || "/placeholder.png"} alt={book.title} />
               {book.isPremium && <div className="premium-badge">Premium</div>}
               <div className="book-rating">
                 <FaStar /> <span>{book.rating}</span>

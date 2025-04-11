@@ -15,7 +15,7 @@ const CommunityPage = () => {
       title: "What's your favorite Ghibli film and why?",
       author: {
         name: "Chihiro",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "2 days ago",
       content:
@@ -29,7 +29,7 @@ const CommunityPage = () => {
       title: "The environmental themes in Princess Mononoke",
       author: {
         name: "Ashitaka",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "1 week ago",
       content:
@@ -43,7 +43,7 @@ const CommunityPage = () => {
       title: "Howl's Moving Castle book vs. movie",
       author: {
         name: "Sophie",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "3 days ago",
       content:
@@ -60,7 +60,7 @@ const CommunityPage = () => {
       title: "Spirited Away: A Masterpiece",
       author: {
         name: "Haku",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "1 month ago",
       content:
@@ -75,7 +75,7 @@ const CommunityPage = () => {
       title: "The Wind Rises: Novel Adaptation",
       author: {
         name: "Jiro",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "2 weeks ago",
       content:
@@ -90,7 +90,7 @@ const CommunityPage = () => {
       title: "Princess Mononoke: Original Soundtrack",
       author: {
         name: "San",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "/placeholder.png?height=100&width=100",
       },
       date: "5 days ago",
       content:
@@ -111,7 +111,7 @@ const CommunityPage = () => {
       description:
         "Join us for a virtual screening of My Neighbor Totoro followed by a group discussion about the film's themes and impact.",
       attendees: 87,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.png?height=400&width=600",
     },
     {
       id: 2,
@@ -120,7 +120,7 @@ const CommunityPage = () => {
       time: "2:00 PM EST",
       description: "Learn to paint Ghibli-inspired landscapes using watercolor techniques. All skill levels welcome!",
       attendees: 42,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.png?height=400&width=600",
     },
     {
       id: 3,
@@ -130,7 +130,7 @@ const CommunityPage = () => {
       description:
         "This month we're reading Diana Wynne Jones' novel Howl's Moving Castle and comparing it to the Ghibli film adaptation.",
       attendees: 35,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.png?height=400&width=600",
     },
   ]
 
@@ -159,7 +159,7 @@ const CommunityPage = () => {
           >
             <div className="post-header">
               <div className="post-author">
-                <img src={post.author.avatar || "/placeholder.svg"} alt={post.author.name} />
+                <img src={post.author.avatar || "/placeholder.png"} alt={post.author.name} />
                 <div className="author-info">
                   <span className="author-name">{post.author.name}</span>
                   <span className="post-date">{post.date}</span>
@@ -223,7 +223,7 @@ const CommunityPage = () => {
           >
             <div className="post-header">
               <div className="post-author">
-                <img src={review.author.avatar || "/placeholder.svg"} alt={review.author.name} />
+                <img src={review.author.avatar || "/placeholder.png"} alt={review.author.name} />
                 <div className="author-info">
                   <span className="author-name">{review.author.name}</span>
                   <span className="post-date">{review.date}</span>
@@ -301,7 +301,7 @@ const CommunityPage = () => {
             whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
           >
             <div className="event-image">
-              <img src={event.image || "/placeholder.svg"} alt={event.title} />
+              <img src={event.image || "/placeholder.png"} alt={event.title} />
             </div>
             <div className="event-details">
               <h3>{event.title}</h3>

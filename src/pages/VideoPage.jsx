@@ -21,7 +21,7 @@ const VideoPage = () => {
     {
       id: 1,
       title: "Spirited Away: Official Trailer",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "Watch the official trailer for the Academy Award-winning masterpiece.",
       duration: "2:30",
       source: "https://example.com/video.mp4",
@@ -30,7 +30,7 @@ const VideoPage = () => {
     {
       id: 2,
       title: "Princess Mononoke: Behind the Scenes",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "Discover how this epic tale of humans versus forest gods was created.",
       duration: "15:45",
       source: "https://example.com/video.mp4",
@@ -39,7 +39,7 @@ const VideoPage = () => {
     {
       id: 3,
       title: "My Neighbor Totoro: Full Movie",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "Enjoy the complete heartwarming story about two sisters and their magical forest friends.",
       duration: "1:26:45",
       source: "https://example.com/video.mp4",
@@ -48,7 +48,7 @@ const VideoPage = () => {
     {
       id: 4,
       title: "Howl's Moving Castle: Character Analysis",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "An in-depth look at the complex characters in this beloved film.",
       duration: "22:10",
       source: "https://example.com/video.mp4",
@@ -57,7 +57,7 @@ const VideoPage = () => {
     {
       id: 5,
       title: "The Art of Studio Ghibli",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "Explore the unique artistic style that defines Studio Ghibli films.",
       duration: "35:20",
       source: "https://example.com/video.mp4",
@@ -66,7 +66,7 @@ const VideoPage = () => {
     {
       id: 6,
       title: "Ponyo: The Making Of",
-      thumbnail: "/placeholder.svg?height=400&width=600",
+      thumbnail: "/placeholder.png?height=400&width=600",
       description: "Go behind the scenes of this magical underwater adventure.",
       duration: "28:15",
       source: "https://example.com/video.mp4",
@@ -284,7 +284,7 @@ const VideoPage = () => {
                 onClick={() => selectVideo(video)}
               >
                 <div className="video-thumbnail">
-                  <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} />
+                  <img src={video.thumbnail || "/placeholder.png"} alt={video.title} />
                   {video.isPremium && <div className="premium-badge">Premium</div>}
                   <div className="duration-badge">{video.duration}</div>
                   <div className="play-overlay">

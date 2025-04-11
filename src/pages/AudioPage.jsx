@@ -22,7 +22,7 @@ const AudioPage = () => {
       id: 1,
       title: "Spirited Away",
       narrator: "Rumi Hiiragi",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "Join Chihiro on her journey through the spirit world in this enchanting audiobook.",
       duration: "3h 45m",
       sample: "https://example.com/sample.mp3",
@@ -32,7 +32,7 @@ const AudioPage = () => {
       id: 2,
       title: "Princess Mononoke",
       narrator: "Yōji Matsuda",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "Experience the epic tale of humans versus forest gods in this immersive audio adventure.",
       duration: "4h 20m",
       sample: "https://example.com/sample.mp3",
@@ -42,7 +42,7 @@ const AudioPage = () => {
       id: 3,
       title: "My Neighbor Totoro",
       narrator: "Noriko Hidaka",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "A heartwarming story about two sisters and their magical forest friends.",
       duration: "2h 55m",
       sample: "https://example.com/sample.mp3",
@@ -52,7 +52,7 @@ const AudioPage = () => {
       id: 4,
       title: "Howl's Moving Castle",
       narrator: "Chieko Baisho",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "Follow Sophie's adventure in a magical moving castle in this captivating audiobook.",
       duration: "4h 10m",
       sample: "https://example.com/sample.mp3",
@@ -62,7 +62,7 @@ const AudioPage = () => {
       id: 5,
       title: "Kiki's Delivery Service",
       narrator: "Minami Takayama",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "Join young witch Kiki as she starts her own delivery service in a new town.",
       duration: "3h 15m",
       sample: "https://example.com/sample.mp3",
@@ -72,7 +72,7 @@ const AudioPage = () => {
       id: 6,
       title: "Ponyo",
       narrator: "Yuria Nara",
-      cover: "/placeholder.svg?height=400&width=300",
+      cover: "/placeholder.png?height=400&width=300",
       description: "Dive into the magical underwater world of Ponyo and her journey to become human.",
       duration: "2h 40m",
       sample: "https://example.com/sample.mp3",
@@ -198,7 +198,7 @@ const AudioPage = () => {
             onClick={() => selectAudio(audio)}
           >
             <div className="audio-cover">
-              <img src={audio.cover || "/placeholder.svg"} alt={audio.title} />
+              <img src={audio.cover || "/placeholder.png"} alt={audio.title} />
               {audio.isPremium && <div className="premium-badge">Premium</div>}
               <div className="play-overlay">
                 <FaPlay />
@@ -227,7 +227,7 @@ const AudioPage = () => {
             </button>
             <div className="player-content">
               <div className="player-cover">
-                <img src={selectedAudio.cover || "/placeholder.svg"} alt={selectedAudio.title} />
+                <img src={selectedAudio.cover || "/placeholder.png"} alt={selectedAudio.title} />
               </div>
 
               <div className="player-info">

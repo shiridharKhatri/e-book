@@ -70,16 +70,15 @@ const Navbar = () => {
             transition={{ duration: 0.5 }}
             className="logo-container"
           >
-            <span className="logo-text">Ghibli Stream</span>
+            <span className="logo-text">HearBooks</span>
             <motion.div
-              className="logo-leaf"
+              className="logo-book"
               animate={{
-                rotate: [0, 10, 0, -10, 0],
-                y: [0, -5, 0, -5, 0],
+                rotateY: [0, 180, 360],
               }}
               transition={{
                 repeat: Number.POSITIVE_INFINITY,
-                duration: 5,
+                duration: 8,
                 ease: "easeInOut",
               }}
             />

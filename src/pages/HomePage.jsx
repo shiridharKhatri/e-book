@@ -3,66 +3,128 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { FaArrowRight, FaBookOpen, FaHeadphones, FaVideo, FaStar } from "react-icons/fa"
-import { Carousel } from "react-responsive-carousel"
+import { FaArrowRight, FaBookOpen, FaHeadphones, FaVideo, FaStar, FaBook, FaBookmark, FaSearch } from "react-icons/fa"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import "../styles/HomePage.css"
 
+// Skeleton loader component
+const SkeletonLoader = ({ type }) => {
+  return (
+    <div className={`skeleton-loader ${type}`}>
+      <div className="skeleton-image"></div>
+      <div className="skeleton-content">
+        <div className="skeleton-title"></div>
+        <div className="skeleton-text"></div>
+        <div className="skeleton-text short"></div>
+      </div>
+    </div>
+  )
+}
+
 const HomePage = () => {
-  const [scrollY, setScrollY] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [booksLoaded, setBooksLoaded] = useState(false)
+  const [audioLoaded, setAudioLoaded] = useState(false)
+  const [videosLoaded, setVideosLoaded] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
   const heroRef = useRef(null)
-  const parallaxLayersRef = useRef([])
+  const bookRef = useRef(null)
+  const pageRefs = useRef([])
+  const shapeRefs = useRef([])
+  const searchInputRef = useRef(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
+    // Simulate loading states
+    setTimeout(() => {
+      setBooksLoaded(true)
+    }, 1500)
+
+    setTimeout(() => {
+      setAudioLoaded(true)
+    }, 2200)
+
+    setTimeout(() => {
+      setVideosLoaded(true)
+    }, 2800)
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000)
+
+    // Initialize page turning animation
+    const initPageAnimation = () => {
+      if (pageRefs.current.length > 0) {
+        pageRefs.current.forEach((page, index) => {
+          if (page) {
+            setTimeout(() => {
+              page.classList.add("turn")
+              setTimeout(() => {
+                page.classList.remove("turn")
+              }, 1500)
+            }, index * 3000)
+          }
+        })
+
+        // Repeat the animation
+        setTimeout(initPageAnimation, pageRefs.current.length * 3000)
+      }
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    initPageAnimation()
 
-  // Create animated particles
-  useEffect(() => {
+    // Animate floating shapes
+    const animateShapes = () => {
+      if (shapeRefs.current.length > 0) {
+        shapeRefs.current.forEach((shape, index) => {
+          if (shape) {
+            const xMovement = 20 + Math.random() * 30
+            const yMovement = 20 + Math.random() * 30
+            const duration = 3 + Math.random() * 4
+
+            shape.style.animation = `floatShape ${duration}s ease-in-out infinite`
+            shape.style.animationDelay = `${index * 0.5}s`
+          }
+        })
+      }
+    }
+
+    animateShapes()
+
+    // 3D book rotation on mouse move
+    const handleMouseMove = (e) => {
+      if (bookRef.current) {
+        const book = bookRef.current
+        const bookRect = book.getBoundingClientRect()
+        const bookCenterX = bookRect.left + bookRect.width / 2
+        const bookCenterY = bookRect.top + bookRect.height / 2
+
+        const mouseX = e.clientX
+        const mouseY = e.clientY
+
+        const rotateY = (mouseX - bookCenterX) / 20
+        const rotateX = (bookCenterY - mouseY) / 20
+
+        book.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`
+      }
+    }
+
     const heroElement = heroRef.current
-    if (!heroElement) return
-
-    // Create particles container
-    const particlesContainer = document.createElement("div")
-    particlesContainer.className = "particles-container"
-    heroElement.appendChild(particlesContainer)
-
-    // Create particles
-    const particleCount = 50
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement("div")
-      particle.className = "particle"
-
-      // Random properties
-      const size = Math.random() * 10 + 5
-      const posX = Math.random() * 100
-      const posY = Math.random() * 100
-      const duration = Math.random() * 20 + 10
-      const delay = Math.random() * 5
-
-      // Apply styles
-      particle.style.width = `${size}px`
-      particle.style.height = `${size}px`
-      particle.style.left = `${posX}%`
-      particle.style.top = `${posY}%`
-      particle.style.animationDuration = `${duration}s`
-      particle.style.animationDelay = `${delay}s`
-      particle.style.opacity = Math.random() * 0.5 + 0.1
-
-      particlesContainer.appendChild(particle)
+    if (heroElement) {
+      heroElement.addEventListener("mousemove", handleMouseMove)
     }
 
     return () => {
-      if (heroElement.contains(particlesContainer)) {
-        heroElement.removeChild(particlesContainer)
+      if (heroElement) {
+        heroElement.removeEventListener("mousemove", handleMouseMove)
       }
     }
   }, [])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    console.log("Searching for:", searchQuery)
+    // Implement search functionality
+  }
 
   const featuredContent = [
     {
@@ -99,32 +161,32 @@ const HomePage = () => {
     {
       id: "fantasy",
       title: "Fantasy",
-      icon: "🧙‍♂️",
-      color: "var(--ghibli-blue)",
+      icon: "fantasy-book",
+      color: "var(--primary-color)",
     },
     {
       id: "adventure",
       title: "Adventure",
-      icon: "🗺️",
-      color: "var(--ghibli-green)",
+      icon: "compass",
+      color: "var(--secondary-color)",
     },
     {
       id: "romance",
       title: "Romance",
-      icon: "💖",
-      color: "var(--ghibli-pink)",
+      icon: "heart",
+      color: "var(--accent-color)",
     },
     {
       id: "mystery",
       title: "Mystery",
-      icon: "🔍",
-      color: "var(--ghibli-sunset)",
+      icon: "search",
+      color: "var(--primary-color)",
     },
     {
       id: "scifi",
       title: "Sci-Fi",
-      icon: "🚀",
-      color: "var(--ghibli-spirit)",
+      icon: "rocket",
+      color: "var(--secondary-color)",
     },
   ]
 
@@ -216,19 +278,19 @@ const HomePage = () => {
       id: 1,
       name: "Sophie Hatter",
       avatar: "/placeholder.svg?height=100&width=100",
-      text: "The Ghibli Stream library has completely transformed my reading experience. I love having access to so many magical stories from the Ghibli universe!",
+      text: "The HearBooks library has completely transformed my reading experience. I love having access to so many magical stories!",
     },
     {
       id: 2,
       name: "Ashitaka",
       avatar: "/placeholder.svg?height=100&width=100",
-      text: "Being able to download audiobooks for my commute has been a game-changer. The narration quality is exceptional and truly captures the Ghibli magic.",
+      text: "Being able to download audiobooks for my commute has been a game-changer. The narration quality is exceptional and truly captures the magic.",
     },
     {
       id: 3,
       name: "Kiki",
       avatar: "/placeholder.svg?height=100&width=100",
-      text: "As a busy person, having all this content in one place with a single subscription is exactly what I needed. The beautiful Ghibli-inspired design makes browsing a joy!",
+      text: "As a busy person, having all this content in one place with a single subscription is exactly what I needed. The beautiful design makes browsing a joy!",
     },
   ]
 
@@ -240,134 +302,136 @@ const HomePage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Completely New Hero Section */}
-      <div className="hero-section-new" ref={heroRef}>
-        <div className="parallax-container">
-          <div
-            className="parallax-layer sky-layer"
-            style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-            ref={(el) => (parallaxLayersRef.current[0] = el)}
-          ></div>
-          <div
-            className="parallax-layer clouds-layer"
-            style={{ transform: `translateX(${scrollY * 0.2}px)` }}
-            ref={(el) => (parallaxLayersRef.current[1] = el)}
-          ></div>
-          <div
-            className="parallax-layer mountains-back-layer"
-            style={{ transform: `translateY(${scrollY * 0.15}px)` }}
-            ref={(el) => (parallaxLayersRef.current[2] = el)}
-          ></div>
-          <div
-            className="parallax-layer mountains-mid-layer"
-            style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-            ref={(el) => (parallaxLayersRef.current[3] = el)}
-          ></div>
-          <div
-            className="parallax-layer forest-layer"
-            style={{ transform: `translateY(${scrollY * 0.25}px)` }}
-            ref={(el) => (parallaxLayersRef.current[4] = el)}
-          ></div>
-          <div
-            className="parallax-layer foreground-layer"
-            style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-            ref={(el) => (parallaxLayersRef.current[5] = el)}
-          ></div>
+      {/* Modern Hero Section */}
+      <div className="hero-section-modern" ref={heroRef}>
+        {/* Simplified background shapes */}
+        <div className="hero-shapes">
+          <div className="shape shape-circle" ref={(el) => (shapeRefs.current[0] = el)}></div>
+          <div className="shape shape-donut" ref={(el) => (shapeRefs.current[1] = el)}></div>
         </div>
 
-        <div className="hero-content-new">
-          <motion.div
-            className="hero-text-container"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <h1>Discover the Magic of Ghibli</h1>
-            <p>Immerse yourself in a world of enchanting stories, captivating soundtracks, and breathtaking visuals</p>
-
-            <div className="hero-buttons-new">
-              <Link to="/ebooks">
-                <motion.button
-                  className="explore-button"
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Begin Your Journey
-                </motion.button>
-              </Link>
-              <Link to="/subscription">
-                <motion.button
-                  className="plans-button"
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Explore Plans
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="floating-books-container"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
+        <div className="hero-content-modern">
+          <div className="hero-left-modern">
             <motion.div
-              className="floating-book book-1"
-              animate={{
-                y: [0, -20, 0],
-                rotate: [0, 5, 0],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
+              className="hero-text-container"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="book-cover"></div>
-            </motion.div>
+              <h1>
+                <span className="text-gradient">Reading</span> is
+                <br />
+                <span className="text-highlight">Fascinating</span>
+              </h1>
 
-            <motion.div
-              className="floating-book book-2"
-              animate={{
-                y: [0, -15, 0],
-                rotate: [0, -3, 0],
-                scale: [1, 1.03, 1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            >
-              <div className="book-cover"></div>
-            </motion.div>
+              <p>
+                Discover millions of books for your imagination. Dive into worlds of adventure, romance, mystery, and
+                knowledge with HearBooks.
+              </p>
 
-            <motion.div
-              className="floating-book book-3"
-              animate={{
-                y: [0, -25, 0],
-                rotate: [0, 7, 0],
-                scale: [1, 1.07, 1],
-              }}
-              transition={{
-                duration: 7,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-            >
-              <div className="book-cover"></div>
+              <div className="search-container-hero">
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    placeholder="Search for books, authors, genres..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    ref={searchInputRef}
+                  />
+                  <button type="submit">
+                    <FaSearch />
+                  </button>
+                </form>
+              </div>
+
+              <div className="hero-stats">
+                <div className="stat">
+                  <span className="stat-number">10M+</span>
+                  <span className="stat-label">Books</span>
+                </div>
+                <div className="stat">
+                  <span className="stat-number">5K+</span>
+                  <span className="stat-label">Authors</span>
+                </div>
+                <div className="stat">
+                  <span className="stat-number">120K+</span>
+                  <span className="stat-label">Readers</span>
+                </div>
+              </div>
+
+              <div className="hero-buttons-modern">
+                <Link to="/ebooks">
+                  <motion.button className="explore-button" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                    <FaBookOpen /> Start Reading
+                  </motion.button>
+                </Link>
+                <Link to="/subscription">
+                  <motion.button className="plans-button" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                    <FaBookmark /> View Plans
+                  </motion.button>
+                </Link>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
+
+          <div className="hero-right-modern">
+            <motion.div
+              className="book-3d-container"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              ref={bookRef}
+            >
+              <div className="book-3d">
+                <div className="book-cover">
+                  <div className="book-spine"></div>
+                  <div className="book-front"></div>
+                </div>
+                <div className="book-pages">
+                  <div className="book-page page-1" ref={(el) => (pageRefs.current[0] = el)}>
+                    <div className="page-content">
+                      <div className="page-number">01</div>
+                      <div className="page-image"></div>
+                      <div className="page-text">
+                        <div className="text-line"></div>
+                        <div className="text-line"></div>
+                        <div className="text-line short"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="book-page page-2" ref={(el) => (pageRefs.current[1] = el)}>
+                    <div className="page-content">
+                      <div className="page-number">02</div>
+                      <div className="page-image"></div>
+                      <div className="page-text">
+                        <div className="text-line"></div>
+                        <div className="text-line"></div>
+                        <div className="text-line short"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="book-page page-3" ref={(el) => (pageRefs.current[2] = el)}>
+                    <div className="page-content">
+                      <div className="page-number">03</div>
+                      <div className="page-image"></div>
+                      <div className="page-text">
+                        <div className="text-line"></div>
+                        <div className="text-line"></div>
+                        <div className="text-line short"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="book-shadow"></div>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="scroll-indicator-new">
+        <div className="scroll-indicator-modern">
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{
               repeat: Number.POSITIVE_INFINITY,
               duration: 1.5,
@@ -375,49 +439,10 @@ const HomePage = () => {
             }}
           >
             <span>Scroll to Explore</span>
-            <div className="scroll-arrow-new"></div>
+            <div className="scroll-arrow-modern"></div>
           </motion.div>
         </div>
       </div>
-
-      <section className="featured-section">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Featured Content
-        </motion.h2>
-
-        <Carousel
-          showArrows={true}
-          showStatus={false}
-          showThumbs={false}
-          infiniteLoop={true}
-          autoPlay={true}
-          interval={5000}
-          className="featured-carousel"
-        >
-          {featuredContent.map((item) => (
-            <div key={item.id} className="carousel-item">
-              <div className="carousel-content">
-                <motion.div className="carousel-image" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
-                  <img src={item.image || "/placeholder.svg"} alt={item.title} />
-                  <div className="content-type">{item.type}</div>
-                </motion.div>
-                <div className="carousel-text">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    {item.type === "ebook" ? "Read Now" : item.type === "audio" ? "Listen Now" : "Watch Now"}
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      </section>
 
       <section className="categories-section">
         <motion.h2
@@ -444,7 +469,14 @@ const HomePage = () => {
                 boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
               }}
             >
-              <div className="category-icon">{category.icon}</div>
+              <div className="category-icon-container">
+                <lord-icon
+                  src={`https://cdn.lordicon.com/icons/${category.icon}.json`}
+                  trigger="hover"
+                  colors="primary:#ffffff"
+                  style={{ width: "64px", height: "64px" }}
+                ></lord-icon>
+              </div>
               <h3>{category.title}</h3>
             </motion.div>
           ))}
@@ -475,34 +507,38 @@ const HomePage = () => {
         </div>
 
         <div className="books-grid">
-          {popularBooks.map((book, index) => (
-            <motion.div
-              key={book.id}
-              className="book-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{
-                y: -10,
-                boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div className="book-cover">
-                <img src={book.cover || "/placeholder.svg"} alt={book.title} />
-                <div className="book-rating">
-                  <FaStar /> <span>{book.rating}</span>
-                </div>
-              </div>
-              <div className="book-info">
-                <h3>{book.title}</h3>
-                <p className="book-author">by {book.author}</p>
-                <motion.button className="book-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <FaBookOpen /> Read
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+          {loading && !booksLoaded
+            ? // Skeleton loaders for books
+              Array(4)
+                .fill()
+                .map((_, index) => <SkeletonLoader key={index} type="book" />)
+            : popularBooks.map((book, index) => (
+                <motion.div
+                  key={book.id}
+                  className="book-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{
+                    y: -10,
+                    boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <div className="book-cover">
+                    <img src={book.cover || "/placeholder.svg"} alt={book.title} />
+                    <div className="book-rating">
+                      <FaStar /> <span>{book.rating}</span>
+                    </div>
+                  </div>
+                  <div className="book-info">
+                    <h3>{book.title}</h3>
+                    <p className="book-author">by {book.author}</p>
+                    <motion.button className="book-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <FaBookOpen /> Read
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
         </div>
       </section>
 
@@ -530,35 +566,39 @@ const HomePage = () => {
         </div>
 
         <div className="audiobooks-grid">
-          {topAudiobooks.map((audio, index) => (
-            <motion.div
-              key={audio.id}
-              className="audiobook-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{
-                y: -10,
-                boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div className="audiobook-cover">
-                <img src={audio.cover || "/placeholder.svg"} alt={audio.title} />
-                <div className="audiobook-duration">{audio.duration}</div>
-                <div className="play-overlay">
-                  <div className="play-icon"></div>
-                </div>
-              </div>
-              <div className="audiobook-info">
-                <h3>{audio.title}</h3>
-                <p className="audiobook-narrator">Narrated by {audio.narrator}</p>
-                <motion.button className="audiobook-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <FaHeadphones /> Listen
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+          {loading && !audioLoaded
+            ? // Skeleton loaders for audiobooks
+              Array(4)
+                .fill()
+                .map((_, index) => <SkeletonLoader key={index} type="audio" />)
+            : topAudiobooks.map((audio, index) => (
+                <motion.div
+                  key={audio.id}
+                  className="audiobook-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{
+                    y: -10,
+                    boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <div className="audiobook-cover">
+                    <img src={audio.cover || "/placeholder.svg"} alt={audio.title} />
+                    <div className="audiobook-duration">{audio.duration}</div>
+                    <div className="play-overlay">
+                      <div className="play-icon"></div>
+                    </div>
+                  </div>
+                  <div className="audiobook-info">
+                    <h3>{audio.title}</h3>
+                    <p className="audiobook-narrator">Narrated by {audio.narrator}</p>
+                    <motion.button className="audiobook-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <FaHeadphones /> Listen
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
         </div>
       </section>
 
@@ -586,34 +626,38 @@ const HomePage = () => {
         </div>
 
         <div className="videos-grid">
-          {featuredVideos.map((video, index) => (
-            <motion.div
-              key={video.id}
-              className="video-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{
-                y: -10,
-                boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div className="video-thumbnail">
-                <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} />
-                <div className="video-duration">{video.duration}</div>
-                <div className="play-overlay">
-                  <div className="play-icon"></div>
-                </div>
-              </div>
-              <div className="video-info">
-                <h3>{video.title}</h3>
-                <motion.button className="video-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <FaVideo /> Watch
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+          {loading && !videosLoaded
+            ? // Skeleton loaders for videos
+              Array(3)
+                .fill()
+                .map((_, index) => <SkeletonLoader key={index} type="video" />)
+            : featuredVideos.map((video, index) => (
+                <motion.div
+                  key={video.id}
+                  className="video-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{
+                    y: -10,
+                    boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <div className="video-thumbnail">
+                    <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} />
+                    <div className="video-duration">{video.duration}</div>
+                    <div className="play-overlay">
+                      <div className="play-icon"></div>
+                    </div>
+                  </div>
+                  <div className="video-info">
+                    <h3>{video.title}</h3>
+                    <motion.button className="video-button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <FaVideo /> Watch
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
         </div>
       </section>
 
@@ -634,7 +678,6 @@ const HomePage = () => {
               className="testimonial-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="testimonial-content">
@@ -659,7 +702,7 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2>Unlock the Complete Ghibli Experience</h2>
+            <h2>Unlock the Complete HearBooks Experience</h2>
             <p>Choose from our Essential, Premium, or Viral plans to access premium content</p>
             <ul className="subscription-features">
               <motion.li
@@ -705,7 +748,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View Premium Plans
+                <FaBook /> View Premium Plans
               </motion.button>
             </Link>
           </motion.div>
@@ -755,19 +798,6 @@ const HomePage = () => {
                   delay: 1,
                 }}
               />
-              <motion.div
-                className="floating-character"
-                animate={{
-                  y: [0, -20, 0],
-                  x: [0, 10, 0],
-                  rotate: [0, 5, 0],
-                }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 5,
-                  ease: "easeInOut",
-                }}
-              />
             </div>
           </motion.div>
         </div>
@@ -783,7 +813,7 @@ const HomePage = () => {
             transition={{ duration: 0.5 }}
           >
             <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for the latest Ghibli content and exclusive offers</p>
+            <p>Subscribe to our newsletter for the latest book releases and exclusive offers</p>
             <div className="newsletter-form">
               <input type="email" placeholder="Enter your email" />
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

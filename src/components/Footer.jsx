@@ -9,8 +9,8 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>Ghibli Stream</h3>
-          <p>Your magical portal to a world of enchanting stories, sounds, and sights inspired by Studio Ghibli.</p>
+          <h3>HearBooks</h3>
+          <p>Your portal to a world of enchanting stories, sounds, and sights for book lovers everywhere.</p>
           <motion.div
             className="footer-logo"
             animate={{
@@ -77,15 +77,15 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Ghibli Stream. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} HearBooks. All rights reserved.</p>
         <p className="footer-love">
-          Made with <FaHeart className="heart-icon" /> for Ghibli fans
+          Made with <FaHeart className="heart-icon" /> for book lovers
         </p>
       </div>
 
       <div className="footer-decoration">
         <motion.div
-          className="floating-leaf leaf-1"
+          className="floating-book book-1"
           animate={{
             y: [0, -15, 0],
             x: [0, 10, 0],
@@ -98,7 +98,7 @@ const Footer = () => {
           }}
         />
         <motion.div
-          className="floating-leaf leaf-2"
+          className="floating-book book-2"
           animate={{
             y: [0, -20, 0],
             x: [0, -15, 0],
@@ -111,7 +111,7 @@ const Footer = () => {
           }}
         />
         <motion.div
-          className="floating-leaf leaf-3"
+          className="floating-book book-3"
           animate={{
             y: [0, -10, 0],
             x: [0, 5, 0],
@@ -120,17 +120,6 @@ const Footer = () => {
           transition={{
             repeat: Number.POSITIVE_INFINITY,
             duration: 3.5,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="totoro-silhouette"
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            repeat: Number.POSITIVE_INFINITY,
-            duration: 4,
             ease: "easeInOut",
           }}
         />

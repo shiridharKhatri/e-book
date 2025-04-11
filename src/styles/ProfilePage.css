@@ -53,8 +53,8 @@
 
 .premium-badge {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 5px;
+  right: 15px;
   background-color: var(--secondary-color);
   color: white;
   padding: 0.3rem 0.6rem;
@@ -63,6 +63,7 @@
   font-weight: 600;
   transform: translate(10%, 10%);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 25px;
 }
 
 .profile-details {

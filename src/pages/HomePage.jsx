@@ -28,9 +28,6 @@ const HomePage = () => {
   const [videosLoaded, setVideosLoaded] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const heroRef = useRef(null)
-  const bookRef = useRef(null)
-  const pageRefs = useRef([])
-  const shapeRefs = useRef([])
   const searchInputRef = useRef(null)
 
   useEffect(() => {
@@ -50,74 +47,6 @@ const HomePage = () => {
     setTimeout(() => {
       setLoading(false)
     }, 3000)
-
-    // Initialize page turning animation
-    const initPageAnimation = () => {
-      if (pageRefs.current.length > 0) {
-        pageRefs.current.forEach((page, index) => {
-          if (page) {
-            setTimeout(() => {
-              page.classList.add("turn")
-              setTimeout(() => {
-                page.classList.remove("turn")
-              }, 1500)
-            }, index * 3000)
-          }
-        })
-
-        // Repeat the animation
-        setTimeout(initPageAnimation, pageRefs.current.length * 3000)
-      }
-    }
-
-    initPageAnimation()
-
-    // Animate floating shapes
-    const animateShapes = () => {
-      if (shapeRefs.current.length > 0) {
-        shapeRefs.current.forEach((shape, index) => {
-          if (shape) {
-            const xMovement = 20 + Math.random() * 30
-            const yMovement = 20 + Math.random() * 30
-            const duration = 3 + Math.random() * 4
-
-            shape.style.animation = `floatShape ${duration}s ease-in-out infinite`
-            shape.style.animationDelay = `${index * 0.5}s`
-          }
-        })
-      }
-    }
-
-    animateShapes()
-
-    // 3D book rotation on mouse move
-    const handleMouseMove = (e) => {
-      if (bookRef.current) {
-        const book = bookRef.current
-        const bookRect = book.getBoundingClientRect()
-        const bookCenterX = bookRect.left + bookRect.width / 2
-        const bookCenterY = bookRect.top + bookRect.height / 2
-
-        const mouseX = e.clientX
-        const mouseY = e.clientY
-
-        const rotateY = (mouseX - bookCenterX) / 20
-        const rotateX = (bookCenterY - mouseY) / 20
-
-        book.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`
-      }
-    }
-
-    const heroElement = heroRef.current
-    if (heroElement) {
-      heroElement.addEventListener("mousemove", handleMouseMove)
-    }
-
-    return () => {
-      if (heroElement) {
-        heroElement.removeEventListener("mousemove", handleMouseMove)
-      }
-    }
   }, [])
 
   const handleSearch = (e) => {
@@ -302,41 +231,31 @@ const HomePage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Modern Hero Section */}
-      <div className="hero-section-modern" ref={heroRef}>
-        {/* Simplified background shapes */}
-        <div className="hero-shapes">
-          <div className="shape shape-circle" ref={(el) => (shapeRefs.current[0] = el)}></div>
-          <div className="shape shape-donut" ref={(el) => (shapeRefs.current[1] = el)}></div>
-        </div>
-
-        <div className="hero-content-modern">
-          <div className="hero-left-modern">
+      {/* Clean Modern Hero Section */}
+      <section className="hero-section" ref={heroRef}>
+        <div className="hero-container">
+          <div className="hero-content">
             <motion.div
-              className="hero-text-container"
+              className="hero-text"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <h1>
-                <span className="text-gradient">Reading</span> is
-                <br />
-                <span className="text-highlight">Fascinating</span>
+                Discover a World of <span className="text-accent">Magical</span> Stories
               </h1>
-
               <p>
-                Discover millions of books for your imagination. Dive into worlds of adventure, romance, mystery, and
-                knowledge with HearBooks.
+                Immerse yourself in enchanting tales through books, audio, and video. Join thousands of readers on a
+                journey through worlds of imagination.
               </p>
 
-              <div className="search-container-hero">
+              <div className="hero-search">
                 <form onSubmit={handleSearch}>
                   <input
                     type="text"
-                    placeholder="Search for books, authors, genres..."
+                    placeholder="Search for books, authors, or genres..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    ref={searchInputRef}
                   />
                   <button type="submit">
                     <FaSearch />
@@ -344,92 +263,62 @@ const HomePage = () => {
                 </form>
               </div>
 
+              <div className="hero-cta">
+                <Link to="/ebooks">
+                  <motion.button className="cta-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <FaBookOpen /> Start Reading
+                  </motion.button>
+                </Link>
+                <Link to="/subscription">
+                  <motion.button className="cta-secondary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <FaBookmark /> View Plans
+                  </motion.button>
+                </Link>
+              </div>
+
               <div className="hero-stats">
                 <div className="stat">
                   <span className="stat-number">10M+</span>
                   <span className="stat-label">Books</span>
                 </div>
+                <div className="stat-divider"></div>
                 <div className="stat">
                   <span className="stat-number">5K+</span>
                   <span className="stat-label">Authors</span>
                 </div>
+                <div className="stat-divider"></div>
                 <div className="stat">
                   <span className="stat-number">120K+</span>
                   <span className="stat-label">Readers</span>
                 </div>
               </div>
-
-              <div className="hero-buttons-modern">
-                <Link to="/ebooks">
-                  <motion.button className="explore-button" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    <FaBookOpen /> Start Reading
-                  </motion.button>
-                </Link>
-                <Link to="/subscription">
-                  <motion.button className="plans-button" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    <FaBookmark /> View Plans
-                  </motion.button>
-                </Link>
-              </div>
             </motion.div>
-          </div>
 
-          <div className="hero-right-modern">
             <motion.div
-              className="book-3d-container"
+              className="hero-visual"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              ref={bookRef}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="book-3d">
-                <div className="book-cover">
+              <div className="book-display">
+                <div className="book">
                   <div className="book-spine"></div>
-                  <div className="book-front"></div>
-                </div>
-                <div className="book-pages">
-                  <div className="book-page page-1" ref={(el) => (pageRefs.current[0] = el)}>
-                    <div className="page-content">
-                      <div className="page-number">01</div>
-                      <div className="page-image"></div>
-                      <div className="page-text">
-                        <div className="text-line"></div>
-                        <div className="text-line"></div>
-                        <div className="text-line short"></div>
-                      </div>
-                    </div>
+                  <div className="book-cover">
+                    <div className="book-title">Spirited Away</div>
+                    <div className="book-author">Hayao Miyazaki</div>
                   </div>
-                  <div className="book-page page-2" ref={(el) => (pageRefs.current[1] = el)}>
-                    <div className="page-content">
-                      <div className="page-number">02</div>
-                      <div className="page-image"></div>
-                      <div className="page-text">
-                        <div className="text-line"></div>
-                        <div className="text-line"></div>
-                        <div className="text-line short"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="book-page page-3" ref={(el) => (pageRefs.current[2] = el)}>
-                    <div className="page-content">
-                      <div className="page-number">03</div>
-                      <div className="page-image"></div>
-                      <div className="page-text">
-                        <div className="text-line"></div>
-                        <div className="text-line"></div>
-                        <div className="text-line short"></div>
-                      </div>
-                    </div>
+                  <div className="book-pages">
+                    <div className="book-page"></div>
+                    <div className="book-page"></div>
+                    <div className="book-page"></div>
                   </div>
                 </div>
               </div>
-
-              <div className="book-shadow"></div>
             </motion.div>
           </div>
         </div>
 
-        <div className="scroll-indicator-modern">
+        <div className="scroll-indicator">
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{
@@ -439,10 +328,10 @@ const HomePage = () => {
             }}
           >
             <span>Scroll to Explore</span>
-            <div className="scroll-arrow-modern"></div>
+            <div className="scroll-arrow"></div>
           </motion.div>
         </div>
-      </div>
+      </section>
 
       <section className="categories-section">
         <motion.h2
@@ -861,4 +750,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-

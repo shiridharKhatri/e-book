@@ -26,6 +26,7 @@
 .subscription-content {
   max-width: 1200px;
   margin: 0 auto;
+  flex-direction: column;
 }
 
 /* Pricing Cards */
@@ -234,7 +235,6 @@
 
 /* FAQ Section */
 .faq-section {
-  max-width: 800px;
   margin: 0 auto 5rem;
 }
 
@@ -267,6 +267,7 @@
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
 }
+fjkdhjkfs
 
 /* CTA Section */
 .cta-section {
@@ -276,6 +277,7 @@
   text-align: center;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   position: relative;
+  width: 100%;
   overflow: hidden;
 }
 
